@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+    
+    <!-- Links for leaflet map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Bootstrap -->
+   <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+
+<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+         df-messenger {
+            --df-messenger-button-titlebar-color: #4e73df;
+            --df-messenger-bot-message:#4e73df;
+            --df-messenger-font-color: white;
+            --df-messenger-send-icon: #4e73df;
+            --df-messenger-user-message: #2ecc71;
+         }
+    </style>
+</head>
+<body>
+    <h1>sustainacity</h1>
+
+  <h2><bold>Making cities more sustainable, one person and community at a time.</bold></h2>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navigation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="homepage.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="map.html">Organizations</a>
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link disabled" href="posts.html">Posts</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <!-- Map -->
+<div id="mapid"></div>
+<button id="recenter">Re-center map</button>
+
+<div class="container">
+    <h1 id="organisations">Organisations</h1>
+    <h3>Find organisations which can help you live more sustainably</h3>
+</div>
+
+<div id="items-list">
+    
+</div>
+
+    
+<!-- Script for map - do not move to separate JS file! -->
+<script>
+
+// Locations Array
+
+locations = [
+{
+    name: "Greensole",
+     latitude: "19.121652",
+     longitude: "73.029944",
+     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem.", 
+     imageSource: "https://mumbaimirror.indiatimes.com/thumb/msid-71227785,width-1200,height-900,resizemode-4/.jpg",
+     address: "A-460, C/o Ram Fashion Exports,S Central Rd, MIDC Industrial Area, Mahape, Navi Mumbai, Maharashtra 400701",
+     contact: "contact us at care@greensole.in",
+     maplink: "https://goo.gl/maps/BqESJ6iKgkU8a4Xf7"
+}
+,
+{
+    name: "Goonj",
+    latitude: "30.0869",
+    longitude: "78.2676",
+    description: "Goonj is a non-governmental organisation headquartered in Delhi, India which undertakes disaster relief, humanitarian aid and community development in parts of 23 states across India. Goonj focuses on clothing as a basic but unaddressed need",
+    imageSource: "https://goonj.org/wp-content/uploads/2018/05/goonj-logo.png",
+    address: "J-93, Sarita Vihar, New Delhi- 110076",
+    contact: "contact us at mail@goonj.org",
+    maplink: "https://goo.gl/maps/gisSR9vqN5bPhmgM7"
+},
+{
+    name: "Green-o-tech",
+    latitude: "28.611346",
+    longitude: "77.090496",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem.",
+    imageSource: "https://lh3.googleusercontent.com/proxy/Jj796NaW385rnVxKepAHRaKKa7bnKHjWJg3rNCikyKNIigKJuc3_3pogWLbTyiBTH19t7eEK3QnADa-JFkiIhXowjGtcIpb4PnPf",
+    address: "Some address",
+    contact: "contact us at info@greenotech.in",
+    maplink: "https://g.page/greenotech-india?share"
+},
+
+{
+    name: "Made in Earth",
+    latitude: "12.958344",
+    longitude: "77.518898",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem.",
+    imageSource: "https://madeinearth.in/wp-content/uploads/2019/09/EY01-1024x684.jpg",
+    address: "Nagarabhavi Circle, Jyothi Nagar, Bengaluru, Karnataka 560072",
+    contact: "contact us at contact@madeinearth.in",
+    maplink: "https://g.page/madeinearthindia?share"
+},
+{
+    name: "Greenobin", 
+    latitude: "22.5726",
+    longitude: "88.3639",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem",
+    imageSource: "https://pbs.twimg.com/media/D3EBW4gUcAA741P.jpg",
+    address: "Shop No. 1 &2, Opp. State Bank of India Main Sohna Road, Badshapur Sector 48, Gurgaon", 
+    contact: "contact us at info@greenobin.com ",
+    maplink: "https://g.page/Greenobin?share"
+
+},
+{
+    name: "Global Waste recyclers Ltd",
+    latitude: "13.054372",
+    longitude: "80.268527",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem.",
+    imageSource: "https://lh3.googleusercontent.com/proxy/9-0NgCS1UR7nKvg1-57LVGYWXDrxv61ezCGJKVm9OOGZMiqHsnpnrPm_4HlXAmPoQ-4F8R2f87GshSW9h_P0N831YafSc6Q",
+    address: "Saravana Complex, IIIrd Floor 200, Peters Road,Royapettah, Chennai - 600 014.",
+    contact: "contact us at  info@paperrecycling.in",
+    maplink: "https://goo.gl/maps/r2qs3LUVMLDLbmK87"
+
+},
+{
+    name: "Bamboo House India",
+    latitude: "17.364720",
+    longitude: "78.557840",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ultricies consequat arcu, vel maximus felis ultrices vel. Proin lacinia aliquet porta. Quisque sollicitudin faucibus nisl eget dignissim. Aenean in turpis mattis, lacinia arcu tincidunt, gravida turpis. Integer et malesuada libero, nec elementum nibh. Vivamus quam massa, volutpat ut tristique et, ultrices ac mauris. In hac habitasse platea dictumst. Nullam rutrum sapien orci, vel congue tortor volutpat ut. Vivamus eu sem.",
+    imageSource: "https://www.thebetterindia.com/wp-content/uploads/2016/02/The-Better-India-56.jpg", 
+    address: "1 Mamatha Nagar Colony, Nagole, Hyderabad, Telangana",
+    contact: "contact us at inquiry@bamboohouseindia.org",
+    maplink: "https://goo.gl/maps/VByot5TGG9ss7iHV9"
+}
+]
+
+// Map setup
+var mymap = L.map('mapid').setView([28.6139, 77.2090], 3);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2NydWZmeW5lcmZoZXJkZXIiLCJhIjoiY2s4d200dTAyMGJzdTNtbzB0dmtzd3JkMSJ9.r7FnJWBEieJp4clSU0e4pg', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1
+}).addTo(mymap);
+
+
+
+//Get page elements
+var recenterButton = document.getElementById('recenter');
+var placesListDiv = document.getElementById('items-list')
+
+//Add map markers to page
+var markers = [];
+for (var j=0; j<locations.length; j++) {
+    var currentLocation = locations[j];
+    var heading = document.createElement("b");
+    heading.innerHTML = currentLocation.name;
+    var latitude = currentLocation.latitude;
+    var longitude = currentLocation.longitude;
+    markers.push(L.marker([latitude, longitude], 13)
+    .addTo(mymap)
+    .bindPopup(heading));
+
+}
+
+for (var a=0; a<locations.length; a++){
+    console.log("Adding div")
+    //Create a variable for the current location
+    var theLocation = locations[a];
+
+    //Create the main container
+    var containerDiv = document.createElement('div');
+    containerDiv.setAttribute('class', 'item-place container');
+
+    //Create the image div
+    var imageDiv = document.createElement('div');
+    imageDiv.setAttribute('class', 'col-md-3 col-xs-12 item-image-div');
+
+    //Create the image
+    var image = document.createElement('img');
+    image.setAttribute('class', 'item-image');
+    image.setAttribute('src', theLocation.imageSource)
+
+    imageDiv.appendChild(image)
+
+    //Create the div for the text part of the item
+    var textDiv = document.createElement('div');
+    textDiv.setAttribute('class', 'item-text col-xs-12 col-md-9');
+
+    //Create the item name
+    var itemName = document.createElement('h4');
+    itemName.setAttribute('class', 'item-name');
+    itemName.innerHTML = theLocation.name;
+    textDiv.appendChild(itemName)
+
+    //Create the description
+    var itemDescription = document.createElement('p');
+    itemDescription.setAttribute('class', 'item-description"');
+    itemDescription.innerHTML = theLocation.description;
+    textDiv.appendChild(itemDescription);
+
+    //Create the contact
+    var itemContact = document.createElement('p');
+    itemContact.setAttribute('class', 'item-contact');
+    itemContact.innerHTML = theLocation.contact;
+    textDiv.appendChild(itemContact);
+
+    //Create the address  div
+    var addressDiv = document.createElement('div');
+    addressDiv.setAttribute('class', 'col-sm-6 col-xs-12 address-div');
+    
+    var itemAddress = document.createElement('p');
+    itemAddress.innerHTML = theLocation.address;
+    itemAddress.setAttribute('class', 'item-address')
+    addressDiv.appendChild(itemAddress);
+    textDiv.appendChild(addressDiv)
+
+    //Create the map link  div
+    var mapLinkDiv = document.createElement('div');
+    mapLinkDiv.setAttribute('class', 'col-sm-6 col-xs-12 maplinkdiv');
+    var mapLink = document.createElement('a');
+    mapLink.setAttribute('href', theLocation.maplink);
+    mapLink.setAttribute('class', 'item-maplink');
+    mapLink.setAttribute('target', '_blank');
+    mapLink.innerHTML = "Directions on Google Maps"
+    mapLinkDiv.appendChild(mapLink);
+
+    textDiv.appendChild(mapLinkDiv)
+
+
+    containerDiv.appendChild(imageDiv);
+    containerDiv.appendChild(textDiv);
+    console.log(containerDiv);
+
+    placesListDiv.appendChild(containerDiv)
+
+}
+//Recenter map
+recenterButton.addEventListener('click', function(){
+    mymap.setView([19.121652, 73.029944], 3);
+})
+
+
+
+// Function to ccalculate distance between two points - save for later
+function distance(lat1, lon1, lat2, lon2) {
+  var p = 0.017453292519943295;    // Math.PI / 180
+  var c = Math.cos;
+  var a = 0.5 - c((lat2 - lat1) * p)/2 + 
+          c(lat1 * p) * c(lat2 * p) * 
+          (1 - c((lon2 - lon1) * p))/2;
+
+  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+}
+        
+</script>
+
+ 
+  <style>
+    h1 {
+       color: greenyellow; 
+       font-family: 'Comic Neue', cursive;
+       text-align: center;
+    }
+
+    h3 {
+      color: greenyellow;
+      font-family: 'Comic Neue', cursive;
+      text-align: center;
+
+
+    }
+    #posts {
+      border-style: solid;
+      border-color: green;
+      border-width: 5px;
+    }
+    h4 {
+      font-family: 'Comic Neue', cursive;
+    }
+
+</style>
+</body>
+<df-messenger id="messenger"
+  intent="WELCOME"
+  chat-title="EcoBot"
+  agent-id="3537b3fa-2d3f-42b6-a9de-b736c5c7e8c2"
+  language-code="en" chat-icon="https://i.ibb.co/ydTtkwt/chatbot.png" expand="true"></df-messenger>
+</html>

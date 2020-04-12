@@ -7,6 +7,7 @@ setup(
         "requests",
         "flask",
         "python-firebase",
+        "virtualenv"
 
     ],
     # ...

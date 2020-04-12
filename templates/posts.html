@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <style>
+         df-messenger {
+            --df-messenger-button-titlebar-color: #4e73df;
+            --df-messenger-bot-message:#4e73df;
+            --df-messenger-font-color: white;
+            --df-messenger-send-icon: #4e73df;
+            --df-messenger-user-message: #2ecc71;
+         }
+    </style>
+</head>
+<body>
+    <h1>sustainacity</h1>
+
+  <h2><bold>Making cities more sustainable, one person and community at a time.</bold></h2>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navigation</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="homepage.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="map.html">Organizations</a>
+        </li>
+       
+        <li class="nav-item">
+          <a class="nav-link disabled" href="posts.html">Posts</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <div >
+  <form id="form">
+      <h6>New Post</h6>
+      <p>
+        Your name:
+        <input id="userName" type="text">
+      </p>
+      <p>
+            Your email:
+          <input id="email"   type="text">
+
+      </p>
+      <p>
+          Description:
+          <input id="description" type="text">
+      </p>
+      <input id="submit" type="submit">
+      
+  </form>
+</div>
+<div>
+  <h6>Name:</h6><p>Flynn Cowell</p>
+  <h6>Email:</h6><p>test@helyx.science</p>
+  <h6>Description</h6>
+</div>
+  <style>
+    h1 {
+       color: greenyellow; 
+       font-family: 'Comic Neue', cursive;
+       text-align: center;
+    }
+
+    h3 {
+      color: greenyellow;
+      font-family: 'Comic Neue', cursive;
+      text-align: center;
+
+
+    }
+    #posts {
+      border-style: solid;
+      border-color: green;
+      border-width: 5px;
+    }
+    h4 {
+      font-family: 'Comic Neue', cursive;
+    }
+    #form {
+        align-items: center;
+        position:absolute; left:80px; bottom: 1px;  
+    }
+
+</style>
+<script src="https://www.gstatic.com/firebasejs/7.14.0/firebase-analytics.js"></script>
+
+<script>
+     var config = {
+        apiKey: "AIzaSyAoCbG5iYj2wTb1Vim1l-61jCQHybwUn-M",
+    authDomain: "hack-the-helyx-2020.firebaseapp.com",
+    databaseURL: "https://hack-the-helyx-2020.firebaseio.com",
+    projectId: "hack-the-helyx-2020",
+    storageBucket: "hack-the-helyx-2020.appspot.com",
+    messagingSenderId: "161354504580",
+    appId: "1:161354504580:web:b97a3367e33a025b5fe5d1",
+    measurementId: "G-Y4D4FTCQ9L"
+  };
+  firebase.initializeApp(config);
+
+  // Get a reference to the database service
+  var database = firebase.database();
+  var postRef = firebase.database().ref('posts');
+  // Listen for form submit
+document.getElementById('form').addEventListener('submit', submitForm);
+
+// Submit form
+function submitForm(e){
+  e.preventDefault();
+
+  function writeNewPost(userName, email, description) {
+  // A post entry.
+  var postData = {
+    name: getInputVal("userName"),
+    email: getInputVal("email"),
+    description: getInputVal("description"),
+  };
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  savePost(userName, email, description);
+
+ 
+};
+function savePost (userName, email, description) {
+    var newPostref = postRef.set(
+        userName: userName, 
+        email: email,
+        description: description
+
+}
+
+var userId = firebase().currentUser.uid;
+return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+  var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+  // ...
+});
+
+</script>
+</body>
+<df-messenger id="messenger"
+  intent="WELCOME"
+  chat-title="EcoBot"
+  agent-id="3537b3fa-2d3f-42b6-a9de-b736c5c7e8c2"
+  language-code="en" chat-icon="https://i.ibb.co/ydTtkwt/chatbot.png" expand="true"></df-messenger>
+
+</html>

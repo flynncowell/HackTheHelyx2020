@@ -1,0 +1,44 @@
+
+
+#mapid { height: 400px; width: 100%;}
+
+#recenter {
+    margin-left: 85%;
+    margin-top: 10px;
+    background-color: #d6eaf8;
+}
+.item-place {
+    border-style: solid;
+    border-radius: 20px;
+    margin-top: 2%;
+    min-height: 200px;
+    margin-bottom: 25px;
+    padding: 1%;
+}
+
+.item-image-div{
+    height: 100%;
+    margin-top: 1.2%;
+}
+.item-image{
+    width: 100%;
+}
+.item-text {
+    margin-top: 2%;
+}
+
+.item-description {
+    min-height: 100px;
+}
+
+.maplinkdiv {
+    padding: 0; text-align: right;
+}
+
+.address-div{
+    padding: 0;
+}
+
+.item-name {
+    padding: 0
+}
